@@ -1,0 +1,17 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "A simple nodejs/express/mongodb/pug application for taking notes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "NodeJS",
+    "Pug",
+    "MongoDB",
+    "Express"
+  ],
+  "author": "Hameed Damee",
+  "license": "MIT"
+}

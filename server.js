@@ -1,5 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
+const expressValidator = require("express-validator");
+const flash = require("connect-flash");
+const session = require("express-session");
+const passport = require("passport");
 const bodyParser = require("body-parser");
 
 const db = require("./config/database");
@@ -21,6 +26,25 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+
+// Express Session Middleware
+app.use(
+  session({
+    secret: "fv203485ujnchhtjkmcqshgdyt47y9u9-002y14tr",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Express Messages Middleware
+app.use(flash());
+app.use(function(req, res, next) {
+  res.locals.messages = require("express-messages")(req, res);
+  next();
+});
+
+// Set Public Folder
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function(req, res) {
   res.send("It works");

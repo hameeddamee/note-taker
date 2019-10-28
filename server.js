@@ -27,6 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// Set Public Folder
+app.use(express.static(path.join(__dirname, "public")));
+
 // Express Session Middleware
 app.use(
   session({
@@ -43,8 +46,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-// Set Public Folder
-app.use(express.static(path.join(__dirname, "public")));
+// Passport Config
+require("./config/passport")(passport);
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/", function(req, res) {
   res.send("It works");
